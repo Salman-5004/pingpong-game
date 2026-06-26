@@ -43,7 +43,26 @@ function handleLose() {
 }
 
 document.addEventListener("mousemove", e => {
-  playerPaddle.position = (e.y / window.innerHeight) * 100
+  playerPaddle.position = (e.clientY / window.innerHeight) * 100
+})
+
+let lastTouchY = null
+
+document.addEventListener("touchmove", e => {
+  e.preventDefault()
+
+  const touch = e.touches[0]
+
+  if (lastTouchY !== null) {
+    const deltaY = touch.clientY - lastTouchY
+    playerPaddle.position += deltaY * 0.15
+  }
+
+  lastTouchY = touch.clientY
+}, { passive: false })
+
+document.addEventListener("touchend", () => {
+  lastTouchY = null
 })
 
 window.requestAnimationFrame(update)
