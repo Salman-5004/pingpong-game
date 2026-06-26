@@ -65,4 +65,4 @@ document.addEventListener("touchend", () => {
   lastTouchY = null
 })
 
-window.requestAnimationFrame(update)
+window.requestAnimationFrame(update) 
